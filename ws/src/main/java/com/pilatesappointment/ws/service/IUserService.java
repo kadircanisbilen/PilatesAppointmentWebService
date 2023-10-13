@@ -1,8 +1,10 @@
 package com.pilatesappointment.ws.service;
 
 import com.pilatesappointment.ws.request.UserCreateRequest;
-import com.pilatesappointment.ws.response.UserCreateResponse;
+import jakarta.transaction.Transactional;
+import org.springframework.http.ResponseEntity;
 
 public interface IUserService {
-    UserCreateResponse createUser (UserCreateRequest request);
+    @Transactional
+    ResponseEntity<?> createUser(UserCreateRequest request);
 }

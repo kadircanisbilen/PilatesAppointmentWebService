@@ -3,27 +3,39 @@ package com.pilatesappointment.ws.mapper;
 import com.pilatesappointment.ws.model.Users;
 import com.pilatesappointment.ws.request.UserCreateRequest;
 import com.pilatesappointment.ws.response.UserCreateResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import java.time.LocalDate;
 
 @Component
 public class UserMapper {
-    public Users userCreateRequestToUser (UserCreateRequest request){
-        Users user = new Users();
-        user.setName(request.getName());
-        user.setSurname(request.getSurname());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
-        user.setCreatedAt(LocalDate.now());
-        user.setUpdatedAt(LocalDate.now());
-        return user;
+
+    PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    public Users userCreateRequestToUsers(UserCreateRequest request) {
+        if (request == null) {
+            return null;
+        }
+
+        Users users = new Users();
+        users.setName(request.getName());
+        users.setSurname(request.getSurname());
+        users.setEmail(request.getEmail());
+        users.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        return users;
     }
 
-    public UserCreateResponse userCreateRequestToUserCreateResponse (UserCreateRequest request){
-        UserCreateResponse userCreateResponse = new UserCreateResponse();
-        userCreateResponse.setName(request.getName());
-        userCreateResponse.setSurname(request.getSurname());
-        userCreateResponse.setEmail(request.getEmail());
-        return userCreateResponse;
+    public UserCreateResponse usersToUserCreateResponse(Users users) {
+        if (users == null) {
+            return null;
+        }
+
+        UserCreateResponse response = new UserCreateResponse();
+        response.setName(users.getName());
+        response.setSurname(users.getSurname());
+        response.setEmail(users.getEmail());
+
+        return response;
     }
 }

@@ -1,12 +1,9 @@
 package com.pilatesappointment.ws.controller;
 
-import com.pilatesappointment.ws.mapper.UserMapper;
-
 import com.pilatesappointment.ws.request.UserCreateRequest;
-import com.pilatesappointment.ws.response.UserCreateResponse;
 import com.pilatesappointment.ws.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +19,7 @@ public class UserController {
     }
 
     @PostMapping("/api/v1/users")
-    UserCreateResponse createUser(@RequestBody UserCreateRequest request) {
+    ResponseEntity<?> createUser(@RequestBody UserCreateRequest request) {
         return userService.createUser(request);
     }
 }
