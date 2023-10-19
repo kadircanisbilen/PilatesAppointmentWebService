@@ -7,13 +7,13 @@
         <processorPath useClasspath="false">
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.projectlombok/lombok/1.18.30/f195ee86e6c896ea47a1d39defbe20eb59cd149d/lombok-1.18.30.jar" />
         </processorPath>
-        <module name="ws.ws.main" />
-        <module name="ws.ws.test" />
+        <module name="ws.ws.main~1" />
+        <module name="ws.ws.test~1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="ws.ws.main~1" target="17" />
-      <module name="ws.ws.test~1" target="17" />
+      <module name="ws.ws.main" target="17" />
+      <module name="ws.ws.test" target="17" />
     </bytecodeTargetLevel>
   </component>
 </project>
