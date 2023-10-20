@@ -10,21 +10,20 @@ import lombok.Data;
 @Data
 public class UserCreateRequest {
 
-    @NotBlank(message = "Name can not be blank.")
-    @Size(min = 2, max = 50, message = "Name must has got at least 2 characters.")
+    @NotBlank(message = "{pilates.constraint.name.NotBlank.message}")
+    @Size(min = 2, max = 50, message = "{pilates.constraint.name.Size.message}")
     private String name;
 
-    @NotBlank(message = "Surname can not be blank.")
-    @Size(min = 2, max = 50, message = "Surname must has got at least 2 characters.")
+    @NotBlank(message = "{pilates.constraint.surname.NotBlank.message}")
+    @Size(min = 2, max = 50, message = "{pilates.constraint.surname.Size.message}")
     private String surname;
 
-    @UniqueEmail
-    @NotBlank(message = "Email can not be blank.")
-    @Email(message = "Email must be well-formatted.")
+    @UniqueEmail(message = "{pilates.constraint.email.NotUnique.message}")
+    @NotBlank(message = "{pilates.constraint.email.NotBlank.message}")
+    @Email(message = "{pilates.constraint.email.Format.message}")
     private String email;
 
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-zA-Z])(?=.*[A-Z])(?=.*[-\\#\\$\\.\\%\\&\\*])(?=.*[a-zA-Z]).{8,16}$",
-            message = "Password must be minimum eight characters, at least one uppercase letter," +
-                    " one lowercase letter, one number and one special character")
+            message = "{pilates.constraint.passwordRegex.message}")
     private String password;
 }

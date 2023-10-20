@@ -1,11 +1,12 @@
 package com.pilatesappointment.ws.controller;
 
-import com.pilatesappointment.ws.enumeration.ValidationMessages;
 import com.pilatesappointment.ws.request.UserCreateRequest;
 import com.pilatesappointment.ws.service.IUserService;
+import com.pilatesappointment.ws.util.Messages;
 import error.ApiError;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -37,8 +38,9 @@ public class UserController {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     ResponseEntity<ApiError> handleMethodArgNotValidEx(MethodArgumentNotValidException exception) {
         ApiError apiError = new ApiError();
+        String validationErrorMessage = Messages.getMessageForLocale("pilates.constraint.validationError.message", LocaleContextHolder.getLocale());
         apiError.setPath(PATH);
-        apiError.setMessage(ValidationMessages.VALIDATION_ERROR.getMessage());
+        apiError.setMessage(validationErrorMessage);
         apiError.setStatus(BAD_REQUEST_STATUS);
 //        Map<String, String> validationErrors = new HashMap<>();
 //        for (var fieldError: exception.getBindingResult().getFieldErrors()){

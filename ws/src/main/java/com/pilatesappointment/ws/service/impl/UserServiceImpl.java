@@ -1,14 +1,15 @@
 package com.pilatesappointment.ws.service.impl;
 
-import com.pilatesappointment.ws.enumeration.ResponseMessages;
 import com.pilatesappointment.ws.mapper.UserMapper;
 import com.pilatesappointment.ws.model.Users;
 import com.pilatesappointment.ws.repository.UserRepository;
 import com.pilatesappointment.ws.request.UserCreateRequest;
 import com.pilatesappointment.ws.service.IUserService;
 import com.pilatesappointment.ws.util.GenericMessage;
+import com.pilatesappointment.ws.util.Messages;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -32,6 +33,7 @@ public class UserServiceImpl implements IUserService {
         user.setCreatedAt(LocalDate.now());
         user.setUpdatedAt(LocalDate.now());
         userRepository.save(user);
-        return ResponseEntity.ok(new GenericMessage(ResponseMessages.USER_CREATED.getMessage()));
+        String message = Messages.getMessageForLocale("pilates.constraint.validationError.message", LocaleContextHolder.getLocale());
+        return ResponseEntity.ok(new GenericMessage(message));
     }
 }
