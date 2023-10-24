@@ -13,6 +13,12 @@ public class Users {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "active")
+    private boolean active = false;
+
+    @Column(name = "activation_token")
+    private String activationToken;
+
     @Column(name = "name")
     private String name;
 

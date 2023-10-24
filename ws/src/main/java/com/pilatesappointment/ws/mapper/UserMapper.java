@@ -7,6 +7,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.UUID;
+
 @Component
 public class UserMapper {
 
@@ -18,9 +21,12 @@ public class UserMapper {
         }
 
         Users users = new Users();
+        users.setActivationToken(UUID.randomUUID().toString());
         users.setName(request.getName());
         users.setSurname(request.getSurname());
         users.setEmail(request.getEmail());
+        users.setCreatedAt(LocalDate.now());
+        users.setUpdatedAt(LocalDate.now());
         users.setPassword(passwordEncoder.encode(request.getPassword()));
 
         return users;
